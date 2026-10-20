@@ -66,7 +66,7 @@ def _parse_element(el, extra_vars=None):
     return evaluate(el, extra_vars)
 
 
-def _parse_matrix(raw, extra_vars=None):
+def parse_matrix(raw, extra_vars=None):
     rows = len(raw)
     for row in raw:
         if len(row) != rows:
@@ -103,7 +103,7 @@ def _instantiate(gate_def):
         raise ValueError(f"Gate {name!r}: 'qubits' does not match matrix size")
     params = gate_def.get("params")
     if not params:
-        mat = _parse_matrix(gate_def["matrix"])
+        mat = parse_matrix(gate_def["matrix"])
         check_unitary(mat, what=f"gate {name!r}")
         return [Gate(name, mat)]
     # Parameterized gate: build every (param -> value) combination.
@@ -112,7 +112,7 @@ def _instantiate(gate_def):
     gates = []
     for combo in itertools.product(*values):
         env = dict(zip(pnames, combo))
-        mat = _parse_matrix(gate_def["matrix"], env)
+        mat = parse_matrix(gate_def["matrix"], env)
         if len(pnames) == 1:
             suffix = _fmt_angle(combo[0])
         else:

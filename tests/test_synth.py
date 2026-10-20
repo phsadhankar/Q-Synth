@@ -15,7 +15,11 @@ from qcsynth.search import (  # noqa: E402
     run_circuit,
     verify,
 )
-from qcsynth.targets import get_target  # noqa: E402
+from qcsynth.targets import (  # noqa: E402
+    get_target,
+    parse_matrix_spec,
+    resolve_target,
+)
 
 ROOT = os.path.join(os.path.dirname(__file__), "..")
 CLIFFORD = os.path.join(ROOT, "gates", "clifford_t.json")
@@ -145,3 +149,40 @@ def test_verify_handles_global_phase():
     assert rep["s"] > 1 - 1e-12
     assert abs(rep["phi"] - 0.7) < 1e-12 or abs(rep["phi"] - 0.7 - 2 * math.pi) < 1e-12
     assert rep["err"] < 1e-12
+
+
+# ---------------------------------------------------------------- inline target
+
+def test_resolve_target_builtin_and_inline():
+    m, label = resolve_target("sWaP")
+    assert label == "SWAP" and np.allclose(m, get_target("swap"))
+    m, label = resolve_target('[["sqrt2/2","sqrt2/2"],["sqrt2/2","-sqrt2/2"]]')
+    assert label == "inline matrix" and np.allclose(m, get_target("h"))
+
+
+def test_parse_matrix_spec_element_forms():
+    # numbers, strings, [re, im] pairs must all parse to the S matrix
+    s = parse_matrix_spec('[[1, "0"], [0, [0, "1"]]]')
+    assert np.allclose(s, get_target("s"))
+    # expression elements must parse to the T matrix
+    t = parse_matrix_spec('[[1, "0"], ["0", "exp(1j*pi/4)"]]')
+    assert np.allclose(t, get_target("t"))
+
+
+def test_parse_matrix_spec_rejects_bad_input():
+    with pytest.raises(ValueError):
+        parse_matrix_spec("not json")
+    with pytest.raises(ValueError):
+        parse_matrix_spec("[1, 2, 3]")          # not an array of rows
+    with pytest.raises(ValueError):
+        parse_matrix_spec("[[1,2],[3,4]]")      # valid JSON but not unitary
+    with pytest.raises(ValueError):
+        parse_matrix_spec("[[1,0,0],[0,1,0]]")  # not 2^n x 2^n
+
+
+def test_synthesize_inline_matrix_target():
+    _, flat, _ = load_gate_set(CLIFFORD, names=["h"])
+    target = parse_matrix_spec('[["sqrt2/2","sqrt2/2"],["sqrt2/2","-sqrt2/2"]]')
+    state, found = synthesize(target, flat, max_depth=1)
+    assert found
+    assert state.score > 1 - 1e-9

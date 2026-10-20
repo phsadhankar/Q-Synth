@@ -43,7 +43,8 @@ proportionally slower; if a run fails, raise `--beam` or `--depth`.
 
 ```
 python synthesizer.py
-    --matrix swap | --matrix-file PATH   target unitary (one is required)
+    --matrix NAME|JSON | --matrix-file PATH
+                                         target unitary (one is required)
     --n N                                qubit count (inferred from target if omitted)
     --gates-file PATH                    JSON gate-set file (default gates/clifford_t.json)
     --gate-names CNOT,H,T                optional subset of the gate set to allow
@@ -54,9 +55,22 @@ python synthesizer.py
     --quiet / --show-matrix              output options
 ```
 
-Target units built in: `i x y z h s t` (1 qubit), `cnot cz swap` (2 qubits).
-`--matrix-file` accepts `.npy` or text/CSV matrices (real numbers, `a+bj`
-strings, or the `(a+bj)` format written by `numpy.savetxt`).
+The final circuit matrix (target unitary) can be given three ways:
+
+* `--matrix swap` — a built-in name: `i x y z h s t` (1 qubit),
+  `cnot cz swap` (2 qubits)
+* `--matrix '[[...]]'` — an inline JSON matrix (elements: numbers,
+  expression strings like `"sqrt2/2"` / `"0.5-0.3j"`, or `[re, im]`
+  pairs); it must be a unitary `2^n x 2^n` matrix
+* `--matrix-file PATH` — `.npy` or text/CSV file (real numbers, `a+bj`
+  strings, or the `(a+bj)` format written by `numpy.savetxt`)
+
+Inline example (Hadamard just from RX/RY/RZ gates):
+
+```
+python synthesizer.py --matrix '[["sqrt2/2","sqrt2/2"],["sqrt2/2","-sqrt2/2"]]'^
+    --gates-file gates/universal_rxy.json --depth 4
+```
 
 ## JSON gate-set format
 

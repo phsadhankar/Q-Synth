@@ -10,7 +10,7 @@ import numpy as np
 
 from .gates import load_gate_set
 from .search import beam_search, enumerate_moves, verify
-from .targets import get_target, load_matrix_file, n_qubits_of
+from .targets import load_matrix_file, n_qubits_of, resolve_target
 
 DEFAULT_GATES_FILE = "gates/clifford_t.json"
 
@@ -22,8 +22,11 @@ def parse_args(argv=None):
                     "target unitary up to global phase.")
     p.add_argument("--n", type=int, default=None,
                    help="number of qubits (inferred from the target by default)")
-    p.add_argument("--matrix", default=None, metavar="NAME",
-                   help="built-in target name: swap, cnot, cz, x, y, z, h, s, t, i")
+    p.add_argument("--matrix", default=None, metavar="NAME|JSON",
+                   help="target unitary: built-in name (swap, cnot, cz, x, y, "
+                        "z, h, s, t, i) or inline JSON matrix, e.g. "
+                        "'[[\"sqrt2/2\",\"sqrt2/2\"],[\"sqrt2/2\",\"-sqrt2/2\"]]'; "
+                        "file targets use --matrix-file")
     p.add_argument("--matrix-file", default=None, metavar="PATH",
                    help="target unitary from .npy or text/CSV file")
     p.add_argument("--gates-file", default=DEFAULT_GATES_FILE, metavar="PATH",
@@ -52,8 +55,7 @@ def parse_args(argv=None):
 
 def run_synthesis(args):
     if args.matrix:
-        target = get_target(args.matrix)
-        tname = args.matrix.upper()
+        target, tname = resolve_target(args.matrix)
     else:
         target = load_matrix_file(args.matrix_file)
         tname = args.matrix_file
