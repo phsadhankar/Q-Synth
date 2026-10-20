@@ -1,0 +1,25 @@
+{
+  "name": "Universal rotations RX/RY/RZ on a pi/4 angle grid",
+  "gates": [
+    {
+      "name": "RX", "qubits": 1,
+      "matrix": [["cos(theta/2)", "-I*sin(theta/2)"],
+                 ["-I*sin(theta/2)", "cos(theta/2)"]],
+      "params": { "theta": ["-pi", "-3*pi/4", "-pi/2", "-pi/4",
+                            "pi/4", "pi/2", "3*pi/4", "pi"] }
+    },
+    {
+      "name": "RY", "qubits": 1,
+      "matrix": [["cos(theta/2)", "-sin(theta/2)"],
+                 ["sin(theta/2)", "cos(theta/2)"]],
+      "params": { "theta": ["-pi", "-3*pi/4", "-pi/2", "-pi/4",
+                            "pi/4", "pi/2", "3*pi/4", "pi"] }
+    },
+    {
+      "name": "RZ", "qubits": 1,
+      "matrix": [["exp(-I*theta/2)", "0"], ["0", "exp(I*theta/2)"]],
+      "params": { "theta": ["-pi", "-3*pi/4", "-pi/2", "-pi/4",
+                            "pi/4", "pi/2", "3*pi/4", "pi"] }
+    }
+  ]
+}

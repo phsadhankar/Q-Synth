@@ -1,0 +1,37 @@
+{
+  "name": "Clifford+T (fixed-angle)",
+  "gates": [
+    {
+      "name": "X", "qubits": 1,
+      "matrix": [[0, 1], [1, 0]]
+    },
+    {
+      "name": "Y", "qubits": 1,
+      "matrix": [[0, [0, "-1"]], [[0, "1"], 0]]
+    },
+    {
+      "name": "Z", "qubits": 1,
+      "matrix": [[1, 0], [0, -1]]
+    },
+    {
+      "name": "H", "qubits": 1,
+      "matrix": [["sqrt2/2", "sqrt2/2"], ["sqrt2/2", "-sqrt2/2"]]
+    },
+    {
+      "name": "S", "qubits": 1,
+      "matrix": [[1, 0], [0, "1j"]]
+    },
+    {
+      "name": "T", "qubits": 1,
+      "matrix": [[1, 0], [0, "exp(1j*pi/4)"]]
+    },
+    {
+      "name": "CNOT", "qubits": 2,
+      "matrix": [[1, 0, 0, 0], [0, 0, 0, 1], [0, 0, 1, 0], [0, 1, 0, 0]]
+    },
+    {
+      "name": "CZ", "qubits": 2,
+      "matrix": [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, -1]]
+    }
+  ]
+}
