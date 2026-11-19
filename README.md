@@ -1,25 +1,73 @@
-# Quantum Circuit Synthesizer
+# Quantum Circuit Synthesizer & Optimizer
 
-A synthesis tool that automatically searches for the shortest sequence of
-allowed gates whose matrix product reproduces a target unitary, up to a
-global phase.
+A synthesis and optimization tool that automatically searches for the shortest
+sequence of allowed gates whose matrix product reproduces a target unitary,
+Boolean function, or truth table, and optimizes existing quantum circuits to
+fewer gates using an allowed gate set.
 
-Given
+Given:
 
-* a target unitary `U` (a `2^n x 2^n` matrix), and
-* a set of allowed gates defined in a JSON file,
+* a target **unitary** (`2^n x 2^n` matrix), a **Boolean function** expression, or a **truth table**, or
+* an existing **circuit** (via string, file, or OpenQASM 2.0) to optimize to fewer gates, and
+* a set of **allowed gates** defined in a JSON file (or specified subset of gate names),
 
-the synthesizer runs a **beam search** over gate sequences and returns a
-circuit `V` with `U = e^{i*phi} * V`, together with verification numbers
-(similarity, global phase, max element error).
+the synthesizer runs a **beam search** and algebraic reduction passes to return
+an optimal circuit with verification numbers (similarity, global phase, max
+element error), optional OpenQASM 2.0 export, and ASCII circuit diagrams.
 
-Currently an MVP: Python 3 + NumPy only, up to ~3 qubits.
+Currently an MVP: Python 3 + NumPy only, up to ~3-4 qubits.
 
 ## Quickstart
 
-```
+```bash
 pip install -r requirements.txt
-python synthesizer.py demo                                  # three example runs
+python synthesizer.py demo                                  # run showcase demos
+```
+
+### 1. Boolean Function Synthesis
+Synthesize quantum circuits for Boolean expressions into oracles:
+
+```bash
+# Bit-flip oracle (|x>|y> -> |x>|y ^ (x0 ^ x1)>) using CNOTs:
+python synthesizer.py --bool-expr "x0 ^ x1" --gates-file gates/clifford_t.json --gate-names CNOT
+
+# Phase oracle (|x> -> (-1)^f(x)|x>) for AND synthesized as CZ:
+python synthesizer.py --bool-expr "x0 and x1" --gates-file gates/clifford_t.json --oracle-mode phase
+
+# Toffoli oracle for AND using reversible gate set:
+python synthesizer.py --bool-expr "x0 and x1" --gates-file gates/reversible.json --gate-names CCX --show-diagram
+```
+
+### 2. Truth Table Synthesis
+Synthesize from bitstrings, lists, or mapping dictionaries:
+
+```bash
+# 2-input XOR truth table '0110' into 2 CNOTs:
+python synthesizer.py --truth-table "0110" --gates-file gates/clifford_t.json --gate-names CNOT
+
+# Truth table file or comma-separated format:
+python synthesizer.py --truth-table "0, 1, 1, 0" --oracle-mode bitflip
+```
+
+### 3. Circuit Optimization to Fewer Gates
+Optimize a user-provided circuit using allowed gates:
+
+```bash
+# Peephole cancellation of redundant operations (4 gates -> 0 gates):
+python synthesizer.py --circuit "H[0], CNOT[0,1], CNOT[0,1], H[0]"
+
+# Resynthesize a 7-gate SWAP circuit into the minimal 3 CNOTs:
+python synthesizer.py --circuit "CNOT[0,1], H[0], H[1], CNOT[0,1], H[0], H[1], CNOT[0,1]" --gate-names CNOT
+
+# Gate merging (T + T -> S):
+python synthesizer.py --circuit "T[0], T[0]"
+
+# Optimize OpenQASM file and export optimized QASM:
+python synthesizer.py --circuit-file input.qasm --qasm-out optimized.qasm --show-diagram
+```
+
+### 4. Unitary Matrix Synthesis
+```bash
 python synthesizer.py --matrix swap --gates-file gates/clifford_t.json
 python synthesizer.py --matrix h --gates-file gates/universal_rxy.json --depth 4
 python synthesizer.py --matrix-file my_unitary.npy --gates-file gates/clifford_t.json --gate-names CNOT,H,T
@@ -27,110 +75,65 @@ python synthesizer.py --matrix-file my_unitary.npy --gates-file gates/clifford_t
 
 Run the tests:
 
-```
+```bash
 python -m pytest tests -q
 ```
 
-## What is "beam"?
-
-Beam search is a breadth-first search that does not keep every candidate.
-Level by level, every kept circuit is extended by every allowed gate
-instantiation, all extensions are scored, and only the `K` best are carried
-on (`K` = "beam width"). Larger `K` searches more thoroughly but is
-proportionally slower; if a run fails, raise `--beam` or `--depth`.
-
-## Command line
+## Command Line Reference
 
 ```
-python synthesizer.py
-    --matrix NAME|JSON | --matrix-file PATH
-                                         target unitary (one is required)
-    --n N                                qubit count (inferred from target if omitted)
-    --gates-file PATH                    JSON gate-set file (default gates/clifford_t.json)
-    --gate-names CNOT,H,T                optional subset of the gate set to allow
-    --depth D                            longest circuit to consider (default 8)
-    --beam K                             beam width (default 2000)
-    --tol TOL                            similarity that counts as exact (default 1e-9)
-    --time-limit SECONDS                 give up after this long (best-effort best found)
-    --quiet / --show-matrix              output options
+python synthesizer.py [options]
+
+Target inputs (choose one):
+    --bool-expr EXPR             Boolean expression, e.g. '(x0 and x1) ^ x2' or 'a & b | ~c'
+    --truth-table SPEC           Truth table: bitstring ('0110'), list ('0,1,1,0'), or mapping
+    --truth-table-file PATH      Path to file containing a truth table
+    --oracle-mode MODE           'bitflip' (|x>|y> -> |x>|y^f(x)>, n+1 qubits, default),
+                                 'phase' (|x> -> (-1)^f(x)|x>, n qubits), or
+                                 'permutation' (|x> -> |f(x)>, n qubits)
+    --matrix NAME|JSON           Built-in name (swap, cnot, cz, ccx, toffoli, cswap, x, y, z, h, s, t)
+                                 or inline JSON matrix
+    --matrix-file PATH           Target unitary from .npy or text/CSV file
+
+Circuit optimization:
+    --circuit OPS                Input circuit to optimize, e.g. 'H[0], CNOT[0,1], H[0]'
+    --circuit-file PATH          File containing circuit (.txt or OpenQASM .qasm)
+    --optimize                   Flag to optimize the input circuit (inferred if --circuit is given)
+    --window-size W              Sliding window size for block resynthesis (default 4)
+
+Allowed gate specification:
+    --gates-file PATH            JSON gate-set file (default: gates/clifford_t.json)
+    --gate-names N1,N2,...       Optional subset of gates from the gate set to allow
+
+Search parameters:
+    --n N                        Number of qubits (inferred from target/circuit if omitted)
+    --depth D                    Maximum circuit depth to search (default: 8)
+    --beam K                     Beam width: candidate circuits kept per depth (default: 2000)
+    --tol TOL                    Similarity tolerance treated as exact match (default: 1e-9)
+    --time-limit SECONDS         Timeout in seconds
+
+Output options:
+    --show-diagram               Display ASCII quantum circuit diagram
+    --qasm-out PATH              Export result to OpenQASM 2.0 file
+    --show-matrix                Print the full unitary matrix
+    --quiet                      Suppress step-by-step progress
 ```
 
-The final circuit matrix (target unitary) can be given three ways:
+## Shipped Gate Set Presets
 
-* `--matrix swap` — a built-in name: `i x y z h s t` (1 qubit),
-  `cnot cz swap` (2 qubits)
-* `--matrix '[[...]]'` — an inline JSON matrix (elements: numbers,
-  expression strings like `"sqrt2/2"` / `"0.5-0.3j"`, or `[re, im]`
-  pairs); it must be a unitary `2^n x 2^n` matrix
-* `--matrix-file PATH` — `.npy` or text/CSV file (real numbers, `a+bj`
-  strings, or the `(a+bj)` format written by `numpy.savetxt`)
+* `gates/clifford_t.json`: Clifford+T basis (X, Y, Z, H, S, T, CNOT, CZ).
+* `gates/reversible.json`: Reversible classical/quantum logic (X, CNOT, CCX/Toffoli, SWAP, CSWAP/Fredkin).
+* `gates/universal_rxy.json`: Discrete single-qubit rotations (RX, RY, RZ on a pi/4 angle grid).
 
-Inline example (Hadamard just from RX/RY/RZ gates):
+## How Optimization Works
 
-```
-python synthesizer.py --matrix '[["sqrt2/2","sqrt2/2"],["sqrt2/2","-sqrt2/2"]]'^
-    --gates-file gates/universal_rxy.json --depth 4
-```
+When optimizing a circuit given by the user with specified allowed gates:
+1. **Commutation-Aware Peephole Reduction**: Checks if gates commute across intermediate operations. Cancels adjacent self-inverses ($H H = I$, $C_X C_X = I$) and merges mergable gates ($T T = S$).
+2. **Global Resynthesis**: Computes the circuit's overall unitary matrix $U$ and performs beam search with the allowed gates up to `depth = len(circuit) - 1`. If an equivalent shorter sequence is found, it replaces the entire circuit.
+3. **Sliding-Window Block Resynthesis**: For longer circuits, slides a window of size $W \in [2, \text{window\_size}]$, computes the sub-unitary, and resynthesizes smaller blocks using allowed gates into strictly fewer gates.
+4. **Verification**: Verifies that the optimized circuit matrix matches the original unitary up to global phase ($\text{similarity} \ge 1 - \text{tol}$).
 
-## JSON gate-set format
+## Conventions
 
-A gate-set file lists every allowed gate by name with its matrix:
-
-```json
-{
-  "name": "preset display name",
-  "gates": [
-    { "name": "H", "qubits": 1,
-      "matrix": [["sqrt2/2", "sqrt2/2"], ["sqrt2/2", "-sqrt2/2"]] },
-    { "name": "RX", "qubits": 1,
-      "matrix": [["cos(theta/2)", "-I*sin(theta/2)"],
-                 ["-I*sin(theta/2)", "cos(theta/2)"]],
-      "params": { "theta": ["pi/4", "pi/2", "pi", "-pi/4"] } }
-  ]
-}
-```
-
-* Each matrix element is a JSON **number**, a **string** expression
-  (`sqrt2/2`, `exp(1j*pi/8)`; `^` is accepted for `**`), or a **pair**
-  `[re, im]`. Available symbols: `I` (imaginary unit), `pi`, `e`, `sqrt2`,
-  `sqrt3`, `sqrt`, `exp`, `sin`, `cos`, `tan`, `log`, `conj`, `abs`.
-* A gate with `"params"` instantiates one concrete gate per parameter
-  combination (labelled e.g. `RX(pi/4)`), keeping the search space finite.
-* Loaded matrices are checked for unitarity, so a bad matrix cannot
-  silently break synthesis.
-
-Shipped presets: `gates/clifford_t.json` (X, Y, Z, H, S, T, CNOT, CZ) and
-`gates/universal_rxy.json` (RX, RY, RZ on a pi/4 angle grid).
-
-## Conventions and scoring
-
-* **Little-endian**: global qubit 0 is the least significant bit of a basis
-  index (same as Qiskit). `CNOT[0,1]` flips qubit 1 when qubit 0 is 1.
-* Gates are embedded around their placement as a Kronecker product; the
-  circuit matrix is the product `V = G_k @ ... @ G_2 @ G_1` where `G_1` is
-  applied first.
-* Similarity: `s = |Tr(U^dagger V)| / 2^n`; `s = 1` iff `V` equals `U` up to
-  global phase. The found circuit is verified after every search and the
-  phase and max element error are reported.
-
-## Project layout
-
-```
-qcsynth/gates.py      gate-set JSON parsing, expression evaluator, unitarity check
-qcsynth/search.py     gate embedding, beam search, verification
-qcsynth/targets.py    built-in target unitaries, matrix file loading
-qcsynth/cli.py        command line interface and demo
-synthesizer.py        entry point
-gates/*.json          gate-set presets
-tests/test_synth.py   pytest suite (embedding, JSON parsing, known decompositions)
-```
-
-## Present limitations (next steps)
-
-* Search is exponential with qubit count/depth: practical range is 1-2
-  qubits interactively, 3 qubits for moderately short circuits.
-* Parameterized gates must be given a finite value grid.
-* No QASM/circuit-diagram export yet.
-* Possible next steps: QASM export, circuit-cost weighting (e.g. 2-qubit
-  gates cost more), A*/iterative-deepening upgrades, Solovay-Kitaev parser
-  for approximation, longer-range SOTA comparison.
+* **Little-endian**: global qubit 0 is the least significant bit (LSB) of a basis index (same as Qiskit).
+* **Similarity score**: $s = |\text{Tr}(U^\dagger V)| / 2^n$; $s = 1$ if and only if $V$ matches $U$ up to a global phase.
