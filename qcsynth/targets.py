@@ -28,9 +28,16 @@ _SWAP = np.array([[1, 0, 0, 0],
                   [0, 1, 0, 0],
                   [0, 0, 0, 1]], dtype=np.complex128)
 
+_CCX = np.eye(8, dtype=np.complex128)
+_CCX[[3, 7], :] = _CCX[[7, 3], :]  # flip wire 2 if wire 0 and 1 are 1
+
+_CSWAP = np.eye(8, dtype=np.complex128)
+_CSWAP[[3, 5], :] = _CSWAP[[5, 3], :]  # swap wire 1 and 2 if wire 0 is 1
+
 TARGETS = {
     "i": _I2, "x": _X, "y": _Y, "z": _Z, "h": _H, "s": _S, "t": _T,
     "cnot": _CNOT, "cz": _CZ, "swap": _SWAP,
+    "ccx": _CCX, "toffoli": _CCX, "cswap": _CSWAP, "fredkin": _CSWAP,
 }
 
 

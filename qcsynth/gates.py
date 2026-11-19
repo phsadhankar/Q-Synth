@@ -45,6 +45,14 @@ class Gate:
     name: str
     matrix: np.ndarray
 
+    def __hash__(self):
+        return hash((self.name, self.matrix.shape, self.matrix.tobytes()))
+
+    def __eq__(self, other):
+        if not isinstance(other, Gate):
+            return False
+        return self.name == other.name and np.array_equal(self.matrix, other.matrix)
+
     @property
     def qubits(self):
         n = self.matrix.shape[0]
