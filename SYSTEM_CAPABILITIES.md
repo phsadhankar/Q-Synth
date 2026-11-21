@@ -81,28 +81,28 @@ Quantum computing algorithms are conceptualized at high levels of abstraction—
 ### 2.1 Theoretical Foundations
 
 Given a target unitary operator $U \in \mathrm{U}(2^n)$ and an allowable gate set $\mathcal{G} = \{g_1, \dots, g_m\}$, the synthesis objective is to find an ordered sequence of gate placements $C = (G_1, G_2, \dots, G_L)$ such that the accumulated matrix:
-$$V = G_L G_{L-1} \cdots G_2 G_1$$
+$V = G_L G_{L-1} \cdots G_2 G_1$
 reproduces $U$ up to an unobservable global phase factor $\phi \in [-\pi, \pi)$:
-$$U \approx e^{i\phi} V.$$
+$U \approx e^{i\phi} V.$
 
 #### Distance and Similarity Metric
 Physical quantum observables $\langle \psi | M | \psi \rangle$ are invariant under global phase transformations $|\psi\rangle \mapsto e^{i\phi} |\psi\rangle$. Consequently, Q-Synth uses the **normalized Hilbert--Schmidt trace similarity**:
-$$s(U, V) = \frac{|\Tr(U^\dagger V)|}{2^n} \in [0, 1].$$
+$s(U, V) = \frac{|\Tr(U^\dagger V)|}{2^n} \in [0, 1].$
 
 - $s(U, V) = 1$ if and only if $V = e^{-i\phi} U$ exactly.
 - $s(U, V) = 0$ if $U$ and $V$ are completely orthogonal.
 
 The corresponding phase-invariant distance is:
-$$d(U, V) = \sqrt{1 - s(U, V)}.$$
+$d(U, V) = \sqrt{1 - s(U, V)}.$
 
 When a sequence satisfies $s(U, V) \ge 1 - \epsilon$ (default $\epsilon = 10^{-9}$), the exact global phase $\phi$ and maximum element-wise error $\delta_{\max}$ are computed as:
-$$\phi = -\arg(\Tr(U^\dagger V)), \qquad \delta_{\max} = \max_{j, k} \left| U_{jk} - e^{i\phi} V_{jk} \right|.$$
+$\phi = -\arg(\Tr(U^\dagger V)), \qquad \delta_{\max} = \max_{j, k} \left| U_{jk} - e^{i\phi} V_{jk} \right|.$
 
 ### 2.2 Algorithms & Deduplication
 
 #### Move Enumeration & Placement
 For an $n$-qubit register, each gate $g \in \mathcal{G}$ acting on $k_g$ wires is instantiated across every ordered permutation of wires:
-$$N_{\text{placements}}(g) = P(n, k_g) = \frac{n!}{(n - k_g)!}.$$
+$N_{\text{placements}}(g) = P(n, k_g) = \frac{n!}{(n - k_g)!}.$
 
 For example:
 - A 1-qubit gate on $n=3$ has $P(3, 1) = 3$ placements: $[0], [1], [2]$.
@@ -111,14 +111,14 @@ For example:
 
 #### Kronecker Embedding
 Each move is converted into a full $2^n \times 2^n$ matrix using bit-level sub-word projection:
-$$\mathrm{Embed}(M_g, n, p)_{r, c} = \begin{cases} (M_g)_{r_p, c_p} & \text{if untouched bits of } r \text{ and } c \text{ agree}, \\ 0 & \text{otherwise}, \end{cases}$$
+$\mathrm{Embed}(M_g, n, p)_{r, c} = \begin{cases} (M_g)_{r_p, c_p} & \text{if untouched bits of } r \text{ and } c \text{ agree}, \\ 0 & \text{otherwise}, \end{cases}$
 where $r_p = \sum_{w=0}^{k_g-1} ((r \gg p_w) \& 1) 2^w$ extracts the binary sub-word on the target wires.
 
 #### Quantized Hash Grid Deduplication
 In unconstrained tree search, candidate state space expands as $O(N_{\text{moves}}^d)$, quickly resulting in combinatorial explosion. Many gate sequences produce identical physical states (e.g., $X[0] X[1] = X[1] X[0]$). 
 
 To prune redundant branches without floating-point hash instability, Q-Synth maps each matrix $V$ to an exact integer rounding key on a fine $10^9$ grid:
-$$\mathrm{QuantizedHash}(V) = \mathrm{bytes}\left( \lfloor \mathrm{Re}(V) \cdot 10^9 \rceil, \lfloor \mathrm{Im}(V) \cdot 10^9 \rceil \right).$$
+$\mathrm{QuantizedHash}(V) = \mathrm{bytes}\left( \lfloor \mathrm{Re}(V) \cdot 10^9 \rceil, \lfloor \mathrm{Im}(V) \cdot 10^9 \rceil \right).$
 States with identical quantized hash keys are discarded immediately, retaining only unique candidate states before beam sorting.
 
 ### 2.3 Step-by-Step Workflow
@@ -199,10 +199,10 @@ Q-Synth synthesizes Boolean logic formulas directly into quantum circuits. Input
 
 #### Variable Ordering Convention
 Variable names are automatically detected. When indexed variables are used (e.g., `x0, x1, x2` or `q0, q1`), Q-Synth extracts their numerical indices and assigns them to qubit wires accordingly:
-$$x_i \mapsto \text{qubit wire } i.$$
+$x_i \mapsto \text{qubit wire } i.$
 
 Under the **little-endian convention**, integer row index $k \in [0, 2^n - 1]$ corresponds to assigning bit $(k \gg i) \& 1$ to variable $x_i$:
-$$k = \sum_{i=0}^{n-1} b_i 2^i \implies x_i = b_i.$$
+$k = \sum_{i=0}^{n-1} b_i 2^i \implies x_i = b_i.$
 
 ### 3.2 Quantum Oracle Paradigms
 
@@ -220,13 +220,13 @@ Q-Synth supports three primary quantum oracle embeddings:
 ```
 
 1. **Bit-Flip Oracle (`--oracle-mode bitflip`)**:
-   $$U_{\text{bitflip}} \ket{x}\ket{y} = \ket{x}\ket{y \oplus f(x)},$$
+   $U_{\text{bitflip}} \ket{x}\ket{y} = \ket{x}\ket{y \oplus f(x)},$
    where $x \in \{0,1\}^n$ is placed on wires $0 \dots n-1$ and $y \in \{0, 1\}$ is on wire $n$. Matrix size: $2^{n+1} \times 2^{n+1}$.
 2. **Phase Oracle (`--oracle-mode phase`)**:
-   $$U_{\text{phase}} \ket{x} = (-1)^{f(x)} \ket{x}.$$
+   $U_{\text{phase}} \ket{x} = (-1)^{f(x)} \ket{x}.$
    Operates strictly on $n$ qubits with zero ancilla overhead. The resulting matrix is diagonal with diagonal entries $(-1)^{f(x)} \in \{+1, -1\}$.
 3. **Permutation Oracle (`--oracle-mode permutation`)**:
-   $$U_{\text{perm}} \ket{x} = \ket{f(x)}.$$
+   $U_{\text{perm}} \ket{x} = \ket{f(x)}.$
    Applies to reversible bijections $f: \{0,1\}^n \to \{0,1\}^n$. Matrix size: $2^n \times 2^n$.
 
 ### 3.3 Reversible Gate Library
@@ -290,15 +290,15 @@ When a user supplies an existing circuit that may contain sub-optimal sequences 
 
 #### Commutation Rule
 Two operations $G_i$ on placement $p_i$ and $G_j$ on placement $p_j$ commute if:
-$$[G_i, G_j] = G_i G_j - G_j G_i = 0.$$
+$[G_i, G_j] = G_i G_j - G_j G_i = 0.$
 - **Disjoint placements**: If $p_i \cap p_j = \emptyset$, $[G_i, G_j] = 0$ is guaranteed.
 - **Diagonal gates**: Diagonal operations ($Z, S, T, CZ$) on overlapping wires commute with each other.
 
 If $G_j$ commutes with all intermediate operations $G_{i+1}, \dots, G_{j-1}$, it is conceptually commuted adjacent to $G_i$:
 1. **Inverse Cancellation**: If $G_j G_i \propto \mathbb{I}$, both gates are removed from the circuit. Examples:
-   $$H[0] \cdot H[0] \to \emptyset, \qquad \CNOT[0,1] \cdot \CNOT[0,1] \to \emptyset.$$
+   $H[0] \cdot H[0] \to \emptyset, \qquad \CNOT[0,1] \cdot \CNOT[0,1] \to \emptyset.$
 2. **Gate Merging**: If $G_j G_i \propto G_{\text{allowed}}$ on the same placement, the two gates are replaced with the single combined gate. Example:
-   $$T[0] \cdot T[0] \to S[0], \qquad S[0] \cdot S[0] \to Z[0].$$
+   $T[0] \cdot T[0] \to S[0], \qquad S[0] \cdot S[0] \to Z[0].$
 
 ### 4.2 Global and Sliding-Window Resynthesis
 
@@ -316,7 +316,7 @@ Peephole optimization alone cannot simplify non-adjacent subcircuits whose inter
 
 ### 4.3 Allowed Gate Set Constraints
 
-A key capability requested by users is restricting optimization to a specified gate set (e.g., using `--gate-names CNOT` or `--gates-file gates/clifford_t.json`). The optimizer guarantees that every gate in the output circuit belongs strictly to the allowable set.
+A key capability is restricting optimization to a specified gate set (e.g., using `--gate-names CNOT` or `--gates-file gates/clifford_t.json`). The optimizer guarantees that every gate in the output circuit belongs strictly to the allowable set.
 
 ### 4.4 Step-by-Step Workflow
 
@@ -368,7 +368,7 @@ The optimizer was benchmarked across representative test cases:
 
 #### Highlight: Resynthesis of 7-Gate SWAP
 A standard pedagogical circuit implements a SWAP gate using 7 gates:
-$$C = \CNOT[0,1] \cdot (H[0] \otimes H[1]) \cdot \CNOT[0,1] \cdot (H[0] \otimes H[1]) \cdot \CNOT[0,1].$$
+$C = \CNOT[0,1] \cdot (H[0] \otimes H[1]) \cdot \CNOT[0,1] \cdot (H[0] \otimes H[1]) \cdot \CNOT[0,1].$
 
 ```
 Original (7 gates):
