@@ -1,0 +1,190 @@
+index,category,label,n_qubits,dim,gates_file,gate_names,depth,beam,time_limit,expect,found,n_ops,best_score,verify_s,verify_err,circuit,expanded,elapsed,exp_per_sec,search_depth,match_expect
+0,basic,X,1,2,gates/clifford_t.json,X,2,50,10.0,found,True,1,1.0,1.0,0.0,X,1,2.8700014809146523e-05,34843.18759589302,1,True
+1,basic,Y,1,2,gates/clifford_t.json,Y,2,50,10.0,found,True,1,1.0,1.0,0.0,Y,1,2.3100001271814108e-05,43290.04090662837,1,True
+2,basic,Z,1,2,gates/clifford_t.json,Z,2,50,10.0,found,True,1,1.0,1.0,0.0,Z,1,1.930000144056976e-05,51813.46763518578,1,True
+3,basic,H,1,2,gates/clifford_t.json,H,2,50,10.0,found,True,1,1.0,1.0,1.1102230246251565e-16,H,1,2.5300018023699522e-05,39525.66354155403,1,True
+4,basic,S,1,2,gates/clifford_t.json,S,2,50,10.0,found,True,1,1.0,1.0,0.0,S,1,2.4500011932104826e-05,40816.306652063286,1,True
+5,basic,T,1,2,gates/clifford_t.json,T,2,50,10.0,found,True,1,1.0,1.0,2.133210794294821e-17,T,1,2.2499996703118086e-05,44444.450956804736,1,True
+6,basic,CNOT,2,4,gates/clifford_t.json,CNOT,2,50,10.0,found,True,1,1.0,1.0,0.0,"CNOT[0,1]",1,1.9500002963468432e-05,51282.043488578616,1,True
+7,basic,SWAP-as-3-CNOT,2,4,gates/clifford_t.json,CNOT,4,50,10.0,found,True,3,1.0,1.0,0.0,"CNOT[0,1] @ CNOT[1,0] @ CNOT[0,1]",9,0.001137999992351979,7908.611652447476,3,True
+8,known-1q-pairs,"H,T|HT",1,2,gates/clifford_t.json,"H,T",5,300,10.0,found,True,2,1.0,1.0,1.5700924586837752e-16,T @ H,4,0.0001771999814081937,22573.365799546526,2,True
+9,known-1q-pairs,"T,H|HT",1,2,gates/clifford_t.json,"H,T",5,300,10.0,found,True,2,1.0,1.0,1.5700924586837752e-16,H @ T,5,0.00019199997768737376,26041.669693010637,2,True
+10,known-1q-pairs,"T,T|HT",1,2,gates/clifford_t.json,"H,T",5,300,10.0,found,True,2,1.0000000000000002,1.0000000000000002,1.4262963416290966e-33,T @ T,4,0.00019530000281520188,20481.310508658353,2,True
+11,known-1q-pairs,"H,S|HST",1,2,gates/clifford_t.json,"H,S,T",5,300,10.0,found,True,2,1.0,1.0,1.1102230246251565e-16,S @ H,5,0.00013810000382363796,36205.647078658316,2,True
+12,known-1q-pairs,"H,T|HST",1,2,gates/clifford_t.json,"H,S,T",5,300,10.0,found,True,2,1.0,1.0,1.5700924586837752e-16,T @ H,6,0.00025499999173916876,23529.412526951004,2,True
+13,known-1q-pairs,"S,H|HST",1,2,gates/clifford_t.json,"H,S,T",5,300,10.0,found,True,2,1.0,1.0,1.1102230246251565e-16,H @ S,10,0.00025599999935366213,39062.500098623335,2,True
+14,known-1q-pairs,"S,S|HST",1,2,gates/clifford_t.json,"H,S,T",5,300,10.0,found,True,2,1.0,1.0,0.0,S @ S,8,0.0002792000013869256,28653.29498660463,2,True
+15,known-1q-pairs,"S,T|HST",1,2,gates/clifford_t.json,"H,S,T",5,300,10.0,found,True,2,1.0,1.0,2.133210794294821e-17,T @ S,6,0.00015089998487383127,39761.435397204645,2,True
+16,known-1q-pairs,"T,H|HST",1,2,gates/clifford_t.json,"H,S,T",5,300,10.0,found,True,2,1.0,1.0,1.5700924586837752e-16,H @ T,10,0.00025610000011511147,39047.247151523676,2,True
+17,known-1q-pairs,"T,S|HST",1,2,gates/clifford_t.json,"H,S,T",5,300,10.0,found,True,2,1.0,1.0,2.133210794294821e-17,T @ S,6,0.00020680000307038426,29013.53922107005,2,True
+18,known-1q-pairs,"T,T|HST",1,2,gates/clifford_t.json,"H,S,T",5,300,10.0,found,True,1,1.0,1.0,2.230669527420026e-16,S,2,7.270000060088933e-05,27510.316141256462,1,True
+19,known-1q-pairs,"X,Y|XYZHST",1,2,gates/clifford_t.json,"X,Y,Z,H,S,T",5,400,10.0,found,True,1,1.0,1.0,6.123233995736766e-17,Z,3,0.00013110000872984529,22883.293670727588,1,True
+20,known-1q-pairs,"X,Z|XYZHST",1,2,gates/clifford_t.json,"X,Y,Z,H,S,T",5,400,10.0,found,True,1,1.0,1.0,6.123233995736766e-17,Y,2,9.23000043258071e-05,21668.47135716547,1,True
+21,known-1q-pairs,"X,H|XYZHST",1,2,gates/clifford_t.json,"X,Y,Z,H,S,T",5,400,10.0,found,True,2,1.0,1.0,1.1102230246251565e-16,Z @ H,27,0.0005848000000696629,46169.630637455004,2,True
+22,known-1q-pairs,"X,S|XYZHST",1,2,gates/clifford_t.json,"X,Y,Z,H,S,T",5,400,10.0,found,True,2,1.0,1.0,0.0,S @ X,11,0.00025809998624026775,42619.142140364136,2,True
+23,known-1q-pairs,"X,T|XYZHST",1,2,gates/clifford_t.json,"X,Y,Z,H,S,T",5,400,10.0,found,True,2,1.0,1.0,2.133210794294821e-17,T @ X,12,0.0004023000074084848,29828.485655023906,2,True
+24,known-1q-pairs,"Y,X|XYZHST",1,2,gates/clifford_t.json,"X,Y,Z,H,S,T",5,400,10.0,found,True,1,1.0,1.0,6.123233995736766e-17,Z,3,0.00010679999832063913,28089.888082144746,1,True
+25,known-1q-pairs,"Y,Z|XYZHST",1,2,gates/clifford_t.json,"X,Y,Z,H,S,T",5,400,10.0,found,True,1,1.0,1.0,6.123233995736766e-17,X,1,2.1099986042827368e-05,47393.39627856936,1,True
+26,known-1q-pairs,"Y,H|XYZHST",1,2,gates/clifford_t.json,"X,Y,Z,H,S,T",5,400,10.0,found,True,2,1.0,1.0,1.1102230246251565e-16,H @ Y,34,0.0008870000019669533,38331.45425547218,2,True
+27,known-1q-pairs,"Y,S|XYZHST",1,2,gates/clifford_t.json,"X,Y,Z,H,S,T",5,400,10.0,found,True,2,1.0,1.0,0.0,S @ Y,17,0.000592199998209253,28706.51815502552,2,True
+28,known-1q-pairs,"Y,T|XYZHST",1,2,gates/clifford_t.json,"X,Y,Z,H,S,T",5,400,10.0,found,True,2,1.0,1.0,2.133210794294821e-17,T @ Y,12,0.0003465999907348305,34622.043626021645,2,True
+29,known-1q-pairs,"Z,X|XYZHST",1,2,gates/clifford_t.json,"X,Y,Z,H,S,T",5,400,10.0,found,True,1,1.0,1.0,6.123233995736766e-17,Y,2,7.899999036453664e-05,25316.45878399761,1,True
+30,known-1q-pairs,"Z,Y|XYZHST",1,2,gates/clifford_t.json,"X,Y,Z,H,S,T",5,400,10.0,found,True,1,1.0,1.0,6.123233995736766e-17,X,1,2.239999594166875e-05,44642.86523105067,1,True
+31,known-1q-pairs,"Z,H|XYZHST",1,2,gates/clifford_t.json,"X,Y,Z,H,S,T",5,400,10.0,found,True,2,1.0,1.0,1.1102230246251565e-16,H @ Z,34,0.0014640000008512288,23224.043702343595,2,True
+32,known-1q-pairs,"Z,S|XYZHST",1,2,gates/clifford_t.json,"X,Y,Z,H,S,T",5,400,10.0,found,True,2,1.0,1.0,0.0,S @ Z,11,0.00040699998498894274,27027.028023843402,2,True
+33,known-1q-pairs,"Z,T|XYZHST",1,2,gates/clifford_t.json,"X,Y,Z,H,S,T",5,400,10.0,found,True,2,1.0,1.0,2.133210794294821e-17,T @ Z,12,0.0004321000014897436,27771.34912896971,2,True
+34,known-1q-pairs,"H,X|XYZHST",1,2,gates/clifford_t.json,"X,Y,Z,H,S,T",5,400,10.0,found,True,2,1.0,1.0,1.1102230246251565e-16,H @ Z,34,0.0013378000003285706,25414.86021202678,2,True
+35,known-1q-pairs,"H,Y|XYZHST",1,2,gates/clifford_t.json,"X,Y,Z,H,S,T",5,400,10.0,found,True,2,1.0,1.0,1.4080039260381202e-16,H @ Y,34,0.0013448000245261937,25282.56943777127,2,True
+36,known-1q-pairs,"H,Z|XYZHST",1,2,gates/clifford_t.json,"X,Y,Z,H,S,T",5,400,10.0,found,True,2,1.0,1.0,1.1102230246251565e-16,Z @ H,27,0.0007965999830048531,33894.05043438911,2,True
+37,known-1q-pairs,"H,S|XYZHST",1,2,gates/clifford_t.json,"X,Y,Z,H,S,T",5,400,10.0,found,True,2,1.0,1.0,1.1102230246251565e-16,S @ H,11,0.0004952000163029879,22213.246441554344,2,True
+38,known-1q-pairs,"H,T|XYZHST",1,2,gates/clifford_t.json,"X,Y,Z,H,S,T",5,400,10.0,found,True,2,1.0,1.0,1.5700924586837752e-16,T @ H,12,0.0004194999928586185,28605.483204487886,2,True
+39,known-1q-pairs,"S,X|XYZHST",1,2,gates/clifford_t.json,"X,Y,Z,H,S,T",5,400,10.0,found,True,2,1.0,1.0,1.2246467991473532e-16,S @ Y,17,0.0006511000101454556,26109.66016757119,2,True
+40,known-1q-pairs,"S,Y|XYZHST",1,2,gates/clifford_t.json,"X,Y,Z,H,S,T",5,400,10.0,found,True,2,1.0,1.0,0.0,S @ X,11,0.00027540000155568123,39941.90246137666,2,True
+41,known-1q-pairs,"S,Z|XYZHST",1,2,gates/clifford_t.json,"X,Y,Z,H,S,T",5,400,10.0,found,True,2,1.0,1.0,0.0,S @ Z,11,0.0002914000069722533,37748.79799864728,2,True
+42,known-1q-pairs,"S,H|XYZHST",1,2,gates/clifford_t.json,"X,Y,Z,H,S,T",5,400,10.0,found,True,2,1.0,1.0,1.1102230246251565e-16,H @ S,40,0.001266200008103624,31590.585803192047,2,True
+43,known-1q-pairs,"S,S|XYZHST",1,2,gates/clifford_t.json,"X,Y,Z,H,S,T",5,400,10.0,found,True,1,1.0,1.0,0.0,Z,3,0.00011510000331327319,26064.29116978178,1,True
+44,known-1q-pairs,"S,T|XYZHST",1,2,gates/clifford_t.json,"X,Y,Z,H,S,T",5,400,10.0,found,True,2,1.0,1.0,2.133210794294821e-17,T @ S,18,0.00039510001079179347,45558.08531598723,2,True
+45,known-1q-pairs,"T,X|XYZHST",1,2,gates/clifford_t.json,"X,Y,Z,H,S,T",5,400,10.0,found,True,2,1.0,1.0,2.133210794294821e-17,X @ T,37,0.0007611000037286431,48613.84813918843,2,True
+46,known-1q-pairs,"T,Y|XYZHST",1,2,gates/clifford_t.json,"X,Y,Z,H,S,T",5,400,10.0,found,True,2,1.0,1.0,2.133210794294821e-17,Y @ T,38,0.0011724999931175262,32409.381853353283,2,True
+47,known-1q-pairs,"T,Z|XYZHST",1,2,gates/clifford_t.json,"X,Y,Z,H,S,T",5,400,10.0,found,True,2,1.0,1.0,2.133210794294821e-17,T @ Z,12,0.0002901999978348613,41350.79286536941,2,True
+48,known-1q-pairs,"T,H|XYZHST",1,2,gates/clifford_t.json,"X,Y,Z,H,S,T",5,400,10.0,found,True,2,1.0,1.0,1.5700924586837752e-16,H @ T,40,0.001172600022982806,34112.228565585254,2,True
+49,known-1q-pairs,"T,S|XYZHST",1,2,gates/clifford_t.json,"X,Y,Z,H,S,T",5,400,10.0,found,True,2,1.0,1.0,2.133210794294821e-17,T @ S,18,0.0005701000045519322,31573.407921908416,2,True
+50,known-1q-pairs,"T,T|XYZHST",1,2,gates/clifford_t.json,"X,Y,Z,H,S,T",5,400,10.0,found,True,1,1.0,1.0,2.230669527420026e-16,S,5,0.00016670001787133515,29993.997984206417,1,True
+51,not-found-1q,"H|S,T",1,2,gates/clifford_t.json,"S,T",8,600,10.0,not_found,False,,0.7071067811865475,,,,72,0.0021829000033903867,32983.645557823394,0,True
+52,not-found-1q,"X|S,T",1,2,gates/clifford_t.json,"S,T",8,600,10.0,not_found,False,,0.0,,,,72,0.0021635000011883676,33279.408347793775,0,True
+53,not-found-1q,"S|X,Z",1,2,gates/clifford_t.json,"X,Z",8,600,10.0,not_found,False,,0.7071067811865476,,,,52,0.0015771999896969646,32969.82014943522,0,True
+54,not-found-1q,"T|H,S",1,2,gates/clifford_t.json,"H,S",8,600,10.0,not_found,False,,0.9238795325112871,,,,204,0.009624300000723451,21196.346745702594,0,True
+55,not-found-1q,"T|X,Y,Z,H,S",1,2,gates/clifford_t.json,"X,Y,Z,H,S",8,800,10.0,not_found,False,,0.923879532511287,,,,2875,0.06769289998919703,42471.21929270005,0,True
+56,not-found-1q,"Sdag|X,Z",1,2,gates/clifford_t.json,"X,Z",8,600,10.0,not_found,False,,0.9238795325112867,,,,52,0.0010753000096883625,48358.59716496269,0,True
+57,clifford24,C00,1,2,gates/clifford_t.json,"H,S",6,150,10.0,found,True,5,1.0000000000000002,1.0000000000000002,2.3033281579698516e-16,H @ S @ S @ H @ S,47,0.0010261000134050846,45804.50188674279,5,True
+58,clifford24,C01,1,2,gates/clifford_t.json,"H,S",6,150,10.0,found,True,5,1.0000000000000002,1.0000000000000002,2.535772158592562e-16,S @ H @ S @ S @ H,34,0.0011123999720439315,30564.54589577898,5,True
+59,clifford24,C02,1,2,gates/clifford_t.json,"H,S",6,150,10.0,found,True,6,1.0000000000000002,1.0000000000000002,2.535772158592562e-16,S @ S @ H @ S @ S @ H,62,0.002053100004559383,30198.23674556265,6,True
+60,clifford24,C03,1,2,gates/clifford_t.json,"H,S",6,150,10.0,found,True,4,1.0000000000000002,1.0000000000000002,2.535772158592562e-16,H @ S @ S @ H,23,0.0009140000038314611,25164.113680070765,4,True
+61,clifford24,C04,1,2,gates/clifford_t.json,"H,S",6,150,10.0,found,True,5,1.0,1.0,1.1102230246251565e-16,S @ S @ H @ S @ S,36,0.0010751000081654638,33485.256931055104,5,True
+62,clifford24,C05,1,2,gates/clifford_t.json,"H,S",6,150,10.0,found,True,4,1.0,1.0,1.1102230246251565e-16,S @ H @ S @ S,20,0.0006824000156484544,29308.322891808388,4,True
+63,clifford24,C06,1,2,gates/clifford_t.json,"H,S",6,150,10.0,found,True,6,1.0,1.0,1.1102230246251565e-16,S @ S @ S @ H @ S @ S,66,0.0019601999956648797,33670.03374449732,6,True
+64,clifford24,C07,1,2,gates/clifford_t.json,"H,S",6,150,10.0,found,True,3,1.0,1.0,1.1102230246251565e-16,H @ S @ S,11,0.0006639999919570982,16566.265260904886,3,True
+65,clifford24,C08,1,2,gates/clifford_t.json,"H,S",6,150,10.0,found,True,4,1.0,1.0,1.1102230246251565e-16,S @ S @ H @ S,20,0.000813000020571053,24600.24538000867,4,True
+66,clifford24,C09,1,2,gates/clifford_t.json,"H,S",6,150,10.0,found,True,3,1.0,1.0,1.1102230246251565e-16,S @ H @ S,12,0.0005455999926198274,21994.135194868977,3,True
+67,clifford24,C10,1,2,gates/clifford_t.json,"H,S",6,150,10.0,found,True,5,1.0,1.0,1.1102230246251565e-16,S @ S @ S @ H @ S,38,0.0012959000014234334,29323.250218581918,5,True
+68,clifford24,C11,1,2,gates/clifford_t.json,"H,S",6,150,10.0,found,True,2,1.0,1.0,1.1102230246251565e-16,H @ S,5,0.0001399999891873449,35714.28847261631,2,True
+69,clifford24,C12,1,2,gates/clifford_t.json,"H,S",6,150,10.0,found,True,6,1.0000000000000002,1.0000000000000002,2.220446049250313e-16,S @ S @ S @ H @ S @ H,54,0.0011715999862644821,46090.816518505664,6,True
+70,clifford24,C13,1,2,gates/clifford_t.json,"H,S",6,150,10.0,found,True,5,1.0000000000000002,1.0000000000000002,2.220446049250313e-16,S @ S @ H @ S @ H,30,0.0010061000066343695,29818.109335230736,5,True
+71,clifford24,C14,1,2,gates/clifford_t.json,"H,S",6,150,10.0,found,True,3,1.0000000000000002,1.0000000000000002,2.220446049250313e-16,H @ S @ H,9,0.000294400000711903,30570.65209998866,3,True
+72,clifford24,C15,1,2,gates/clifford_t.json,"H,S",6,150,10.0,found,True,4,1.0000000000000002,1.0000000000000002,2.220446049250313e-16,S @ H @ S @ H,16,0.00036589999217540026,43727.79541446432,4,True
+73,clifford24,C16,1,2,gates/clifford_t.json,"H,S",6,150,10.0,found,True,3,1.0,1.0,1.1102230246251565e-16,S @ S @ H,10,0.0002694000140763819,37119.52293055463,3,True
+74,clifford24,C17,1,2,gates/clifford_t.json,"H,S",6,150,10.0,found,True,2,1.0,1.0,1.1102230246251565e-16,S @ H,4,0.000166199984960258,24067.390866229536,2,True
+75,clifford24,C18,1,2,gates/clifford_t.json,"H,S",6,150,10.0,found,True,4,1.0,1.0,1.1102230246251565e-16,S @ S @ S @ H,22,0.0004961999948136508,44336.96136627763,4,True
+76,clifford24,C19,1,2,gates/clifford_t.json,"H,S",6,150,10.0,found,True,1,1.0,1.0,1.1102230246251565e-16,H,1,2.2799998987466097e-05,43859.651070587,1,True
+77,clifford24,C20,1,2,gates/clifford_t.json,"H,S",6,150,10.0,found,True,3,1.0,1.0,1.2246467991473532e-16,S @ S @ S,14,0.00047149998135864735,29692.47201168153,3,True
+78,clifford24,C21,1,2,gates/clifford_t.json,"H,S",6,150,10.0,found,True,1,1.0,1.0,1.2246467991473532e-16,S,2,8.420000085607171e-05,23752.9688796408,1,True
+79,clifford24,C22,1,2,gates/clifford_t.json,"H,S",6,150,10.0,found,True,2,1.0,1.0,1.2246467991473532e-16,S @ S,6,0.00021440000273287296,27985.07427015087,2,True
+80,clifford24,C23,1,2,gates/clifford_t.json,"H,S",6,150,10.0,found,True,2,1.0000000000000002,1.0000000000000002,2.535772158592562e-16,H @ H,5,0.0001863999932538718,26824.035305570713,2,True
+81,known-2q-products,CNOT01 o X[0] (after),2,4,gates/clifford_t.json,,4,300,10.0,found,True,2,1.0,1.0,0.0,"CNOT[0,1] @ X[0]",29,0.0010445000079926103,27764.480400277,2,True
+82,known-2q-products,CNOT01 o X[0] (before),2,4,gates/clifford_t.json,,4,300,10.0,found,True,2,1.0,1.0,0.0,"X[0] @ CNOT[0,1]",225,0.004662999999709427,48252.19815870057,2,True
+83,known-2q-products,CNOT01 o X[1] (after),2,4,gates/clifford_t.json,,4,300,10.0,found,True,2,1.0,1.0,0.0,"CNOT[0,1] @ X[1]",29,0.0009412000072188675,30811.729470435832,2,True
+84,known-2q-products,CNOT01 o X[1] (before),2,4,gates/clifford_t.json,,4,300,10.0,found,True,2,1.0,1.0,0.0,"CNOT[0,1] @ X[1]",29,0.000976100011030212,29710.070353746156,2,True
+85,known-2q-products,CNOT01 o Y[0] (after),2,4,gates/clifford_t.json,,4,300,10.0,found,True,2,1.0,1.0,0.0,"CNOT[0,1] @ Y[0]",45,0.0014451000024564564,31139.713461702755,2,True
+86,known-2q-products,CNOT01 o Y[0] (before),2,4,gates/clifford_t.json,,4,300,10.0,found,True,2,1.0,1.0,0.0,"Y[0] @ CNOT[0,1]",227,0.006765500002074987,33552.58294736218,2,True
+87,known-2q-products,CNOT01 o Y[1] (after),2,4,gates/clifford_t.json,,4,300,10.0,found,True,2,1.0,1.0,0.0,"CNOT[0,1] @ Y[1]",29,0.000972700014244765,29813.91957983728,2,True
+88,known-2q-products,CNOT01 o Y[1] (before),2,4,gates/clifford_t.json,,4,300,10.0,found,True,2,1.0,1.0,0.0,"Y[1] @ CNOT[0,1]",244,0.005182299995794892,47083.34141172656,2,True
+89,known-2q-products,CNOT01 o Z[0] (after),2,4,gates/clifford_t.json,,4,300,10.0,found,True,2,1.0,1.0,0.0,"CNOT[0,1] @ Z[0]",45,0.0011329000117257237,39721.06940969345,2,True
+90,known-2q-products,CNOT01 o Z[0] (before),2,4,gates/clifford_t.json,,4,300,10.0,found,True,2,1.0,1.0,0.0,"CNOT[0,1] @ Z[0]",45,0.0017124000005424023,26278.90678915339,2,True
+91,known-2q-products,CNOT01 o Z[1] (after),2,4,gates/clifford_t.json,,4,300,10.0,found,True,2,1.0,1.0,0.0,"CNOT[0,1] @ Z[1]",45,0.0012106999929528683,37168.58037658535,2,True
+92,known-2q-products,CNOT01 o Z[1] (before),2,4,gates/clifford_t.json,,4,300,10.0,found,True,2,1.0,1.0,0.0,"Z[1] @ CNOT[0,1]",230,0.005878299998585135,39126.95848380643,2,True
+93,known-2q-products,CNOT01 o H[0] (after),2,4,gates/clifford_t.json,,4,300,10.0,found,True,2,1.0,1.0,1.1102230246251565e-16,"CNOT[0,1] @ H[0]",29,0.0009725000127218664,29820.05102378745,2,True
+94,known-2q-products,CNOT01 o H[0] (before),2,4,gates/clifford_t.json,,4,300,10.0,found,True,2,1.0,1.0,1.1102230246251565e-16,"H[0] @ CNOT[0,1]",247,0.006171099987113848,40025.27920723563,2,True
+95,known-2q-products,CNOT01 o H[1] (after),2,4,gates/clifford_t.json,,4,300,10.0,found,True,2,1.0,1.0,1.1102230246251565e-16,"CNOT[0,1] @ H[1]",29,0.001665899995714426,17408.00772831701,2,True
+96,known-2q-products,CNOT01 o H[1] (before),2,4,gates/clifford_t.json,,4,300,10.0,found,True,2,1.0,1.0,1.1102230246251565e-16,"CZ[0,1] @ H[1]",31,0.000680199998896569,45574.831006010994,2,True
+97,known-2q-products,CNOT01 o S[0] (after),2,4,gates/clifford_t.json,,4,300,10.0,found,True,2,1.0,1.0,0.0,"S[0] @ CNOT[0,1]",25,0.0006707999855279922,37268.93342181916,2,True
+98,known-2q-products,CNOT01 o S[0] (before),2,4,gates/clifford_t.json,,4,300,10.0,found,True,2,1.0,1.0,0.0,"S[0] @ CNOT[0,1]",25,0.0007111000013537705,35156.79925805901,2,True
+99,known-2q-products,CNOT01 o S[1] (after),2,4,gates/clifford_t.json,,4,300,10.0,found,True,2,1.0,1.0,0.0,"CNOT[0,1] @ S[1]",45,0.0009754000057000667,46134.91873798225,2,True
+100,known-2q-products,CNOT01 o S[1] (before),2,4,gates/clifford_t.json,,4,300,10.0,found,True,2,1.0,1.0,0.0,"S[1] @ CNOT[0,1]",26,0.0008755000017117709,29697.315761467733,2,True
+101,known-2q-products,CNOT10 o X[0] (after),2,4,gates/clifford_t.json,,4,300,10.0,found,True,2,1.0,1.0,0.0,"CNOT[1,0] @ X[0]",30,0.0009757000079844147,30747.155636468135,2,True
+102,known-2q-products,CNOT10 o X[0] (before),2,4,gates/clifford_t.json,,4,300,10.0,found,True,2,1.0,1.0,0.0,"CNOT[1,0] @ X[0]",30,0.000679599994327873,44143.614258958485,2,True
+103,known-2q-products,CNOT10 o X[1] (after),2,4,gates/clifford_t.json,,4,300,10.0,found,True,2,1.0,1.0,0.0,"CNOT[1,0] @ X[1]",30,0.0012329999881330878,24330.900477479856,2,True
+104,known-2q-products,CNOT10 o X[1] (before),2,4,gates/clifford_t.json,,4,300,10.0,found,True,2,1.0,1.0,0.0,"X[1] @ CNOT[1,0]",226,0.006055800011381507,37319.59436824974,2,True
+105,known-2q-products,CNOT10 o Y[0] (after),2,4,gates/clifford_t.json,,4,300,10.0,found,True,2,1.0,1.0,0.0,"CNOT[1,0] @ Y[0]",30,0.000759299990022555,39510.07558831767,2,True
+106,known-2q-products,CNOT10 o Y[0] (before),2,4,gates/clifford_t.json,,4,300,10.0,found,True,2,1.0,1.0,0.0,"Y[0] @ CNOT[1,0]",243,0.006195599999045953,39221.38292294839,2,True
+107,known-2q-products,CNOT10 o Y[1] (after),2,4,gates/clifford_t.json,,4,300,10.0,found,True,2,1.0,1.0,0.0,"CNOT[1,0] @ Y[1]",46,0.0010233999928459525,44948.212157085836,2,True
+108,known-2q-products,CNOT10 o Y[1] (before),2,4,gates/clifford_t.json,,4,300,10.0,found,True,2,1.0,1.0,0.0,"Y[1] @ CNOT[1,0]",228,0.005742899986216798,39701.19635501395,2,True
+109,known-2q-products,CNOT10 o Z[0] (after),2,4,gates/clifford_t.json,,4,300,10.0,found,True,2,1.0,1.0,0.0,"CNOT[1,0] @ Z[0]",46,0.001219500001752749,37720.377149557724,2,True
+110,known-2q-products,CNOT10 o Z[0] (before),2,4,gates/clifford_t.json,,4,300,10.0,found,True,2,1.0,1.0,0.0,"Z[0] @ CNOT[1,0]",229,0.006422500009648502,35655.897182712964,2,True
+111,known-2q-products,CNOT10 o Z[1] (after),2,4,gates/clifford_t.json,,4,300,10.0,found,True,2,1.0,1.0,0.0,"CNOT[1,0] @ Z[1]",46,0.0009645000100135803,47693.104740716706,2,True
+112,known-2q-products,CNOT10 o Z[1] (before),2,4,gates/clifford_t.json,,4,300,10.0,found,True,2,1.0,1.0,0.0,"CNOT[1,0] @ Z[1]",46,0.0009982000046875328,46082.9490923509,2,True
+113,known-2q-products,CNOT10 o H[0] (after),2,4,gates/clifford_t.json,,4,300,10.0,found,True,2,1.0,1.0,1.1102230246251565e-16,"CNOT[1,0] @ H[0]",30,0.0006587000098079443,45544.25315516093,2,True
+114,known-2q-products,CNOT10 o H[0] (before),2,4,gates/clifford_t.json,,4,300,10.0,found,True,2,1.0,1.0,1.1102230246251565e-16,"CZ[0,1] @ H[0]",31,0.0007660000119358301,40469.97325973534,2,True
+115,known-2q-products,CNOT10 o H[1] (after),2,4,gates/clifford_t.json,,4,300,10.0,found,True,2,1.0,1.0,1.1102230246251565e-16,"CNOT[1,0] @ H[1]",30,0.0009572000126354396,31341.412039268158,2,True
+116,known-2q-products,CNOT10 o H[1] (before),2,4,gates/clifford_t.json,,4,300,10.0,found,True,2,1.0,1.0,1.1102230246251565e-16,"H[1] @ CNOT[1,0]",248,0.005923999997321516,41863.605690771605,2,True
+117,known-2q-products,CNOT10 o S[0] (after),2,4,gates/clifford_t.json,,4,300,10.0,found,True,2,1.0,1.0,0.0,"CNOT[1,0] @ S[0]",46,0.0018022000149358064,25524.358905101053,2,True
+118,known-2q-products,CNOT10 o S[0] (before),2,4,gates/clifford_t.json,,4,300,10.0,found,True,2,1.0,1.0,0.0,"S[0] @ CNOT[1,0]",25,0.0008316999883390963,30058.91589577266,2,True
+119,known-2q-products,CNOT10 o S[1] (after),2,4,gates/clifford_t.json,,4,300,10.0,found,True,2,1.0,1.0,0.0,"S[1] @ CNOT[1,0]",26,0.0006415999960154295,40523.69102473427,2,True
+120,known-2q-products,CNOT10 o S[1] (before),2,4,gates/clifford_t.json,,4,300,10.0,found,True,2,1.0,1.0,0.0,"S[1] @ CNOT[1,0]",26,0.0008735000155866146,29765.31143223762,2,True
+121,known-2q-products,CZ o X[0] (after),2,4,gates/clifford_t.json,,4,300,10.0,found,True,2,1.0,1.0,0.0,"CZ[0,1] @ X[0]",31,0.0007009000109974295,44228.84792922866,2,True
+122,known-2q-products,CZ o X[0] (before),2,4,gates/clifford_t.json,,4,300,10.0,found,True,2,1.0,1.0,0.0,"X[0] @ CZ[0,1]",241,0.008870799996657297,27167.78645565381,2,True
+123,known-2q-products,CZ o X[1] (after),2,4,gates/clifford_t.json,,4,300,10.0,found,True,2,1.0,1.0,0.0,"CZ[0,1] @ X[1]",31,0.0008219999726861715,37712.89663027201,2,True
+124,known-2q-products,CZ o X[1] (before),2,4,gates/clifford_t.json,,4,300,10.0,found,True,2,1.0,1.0,0.0,"X[1] @ CZ[0,1]",242,0.007742699992377311,31255.246908474954,2,True
+125,known-2q-products,CZ o Y[0] (after),2,4,gates/clifford_t.json,,4,300,10.0,found,True,2,1.0,1.0,0.0,"CZ[0,1] @ Y[0]",47,0.002034499979345128,23101.49937437135,2,True
+126,known-2q-products,CZ o Y[0] (before),2,4,gates/clifford_t.json,,4,300,10.0,found,True,2,1.0,1.0,0.0,"Y[0] @ CZ[0,1]",243,0.005713999998988584,42527.126363845404,2,True
+127,known-2q-products,CZ o Y[1] (after),2,4,gates/clifford_t.json,,4,300,10.0,found,True,2,1.0,1.0,0.0,"CZ[0,1] @ Y[1]",47,0.0009754000057000667,48185.35957078146,2,True
+128,known-2q-products,CZ o Y[1] (before),2,4,gates/clifford_t.json,,4,300,10.0,found,True,2,1.0,1.0,0.0,"Y[1] @ CZ[0,1]",244,0.007987899996805936,30546.201141422214,2,True
+129,known-2q-products,CZ o Z[0] (after),2,4,gates/clifford_t.json,,4,300,10.0,found,True,2,1.0,1.0,0.0,"CZ[0,1] @ Z[0]",31,0.0006720999954268336,46124.08899112205,2,True
+130,known-2q-products,CZ o Z[0] (before),2,4,gates/clifford_t.json,,4,300,10.0,found,True,2,1.0,1.0,0.0,"CZ[0,1] @ Z[0]",31,0.0010771999950520694,28778.314279978742,2,True
+131,known-2q-products,CZ o Z[1] (after),2,4,gates/clifford_t.json,,4,300,10.0,found,True,2,1.0,1.0,0.0,"CZ[0,1] @ Z[1]",47,0.0027794999768957496,16909.516240576253,2,True
+132,known-2q-products,CZ o Z[1] (before),2,4,gates/clifford_t.json,,4,300,10.0,found,True,2,1.0,1.0,0.0,"CZ[0,1] @ Z[1]",47,0.0015599000034853816,30130.136479892928,2,True
+133,known-2q-products,CZ o H[0] (after),2,4,gates/clifford_t.json,,4,300,10.0,found,True,2,1.0,1.0,1.1102230246251565e-16,"CZ[0,1] @ H[0]",31,0.0006865999894216657,45150.01526013976,2,True
+134,known-2q-products,CZ o H[0] (before),2,4,gates/clifford_t.json,,4,300,10.0,found,True,2,1.0,1.0,1.1102230246251565e-16,"CNOT[1,0] @ H[0]",30,0.0006563000206369907,45710.801549088246,2,True
+135,known-2q-products,CZ o H[1] (after),2,4,gates/clifford_t.json,,4,300,10.0,found,True,2,1.0,1.0,1.1102230246251565e-16,"CZ[0,1] @ H[1]",31,0.0010074999881908298,30769.231129884953,2,True
+136,known-2q-products,CZ o H[1] (before),2,4,gates/clifford_t.json,,4,300,10.0,found,True,2,1.0,1.0,1.1102230246251565e-16,"CNOT[0,1] @ H[1]",29,0.0012218000192660838,23735.471879776076,2,True
+137,known-2q-products,CZ o S[0] (after),2,4,gates/clifford_t.json,,4,300,10.0,found,True,2,1.0,1.0,0.0,"S[0] @ CZ[0,1]",25,0.0007932999869808555,31513.9296738742,2,True
+138,known-2q-products,CZ o S[0] (before),2,4,gates/clifford_t.json,,4,300,10.0,found,True,2,1.0,1.0,0.0,"S[0] @ CZ[0,1]",25,0.0008639000006951392,28938.534529324796,2,True
+139,known-2q-products,CZ o S[1] (after),2,4,gates/clifford_t.json,,4,300,10.0,found,True,2,1.0,1.0,0.0,"S[1] @ CZ[0,1]",26,0.0008781999931670725,29606.012528234725,2,True
+140,known-2q-products,CZ o S[1] (before),2,4,gates/clifford_t.json,,4,300,10.0,found,True,2,1.0,1.0,0.0,"S[1] @ CZ[0,1]",26,0.0006618000043090433,39286.7933374305,2,True
+141,known-2q-products,SWAP o X[0] (after),2,4,gates/clifford_t.json,,4,300,10.0,found,True,4,1.0,1.0,0.0,"CNOT[0,1] @ X[1] @ CNOT[1,0] @ CNOT[0,1]",2733,0.07868840001174249,34731.92998703952,4,True
+142,known-2q-products,SWAP o X[0] (before),2,4,gates/clifford_t.json,,4,300,10.0,found,True,4,1.0,1.0,0.0,"CNOT[1,0] @ X[0] @ CNOT[0,1] @ CNOT[1,0]",2734,0.07276670000283048,37572.13120690719,4,True
+143,known-2q-products,SWAP o X[1] (after),2,4,gates/clifford_t.json,,4,300,10.0,found,True,4,1.0,1.0,0.0,"CNOT[1,0] @ X[0] @ CNOT[0,1] @ CNOT[1,0]",2734,0.07855609999387525,34803.153417916124,4,True
+144,known-2q-products,SWAP o X[1] (before),2,4,gates/clifford_t.json,,4,300,10.0,found,True,4,1.0,1.0,0.0,"CNOT[0,1] @ X[1] @ CNOT[1,0] @ CNOT[0,1]",2733,0.07194579998031259,37986.92905976255,4,True
+145,known-2q-products,SWAP o Y[0] (after),2,4,gates/clifford_t.json,,4,300,10.0,found,True,4,1.0,1.0,0.0,"CNOT[0,1] @ CNOT[1,0] @ CNOT[0,1] @ Y[0]",2973,0.0912024000135716,32597.826368139384,4,True
+146,known-2q-products,SWAP o Y[0] (before),2,4,gates/clifford_t.json,,4,300,10.0,found,True,4,1.0,1.0,0.0,"CNOT[0,1] @ CNOT[1,0] @ CNOT[0,1] @ Y[1]",2973,0.08377470000414178,35488.04113715736,4,True
+147,known-2q-products,SWAP o Y[1] (after),2,4,gates/clifford_t.json,,4,300,10.0,found,True,4,1.0,1.0,0.0,"CNOT[0,1] @ CNOT[1,0] @ CNOT[0,1] @ Y[1]",2973,0.09072589999414049,32769.032880269144,4,True
+148,known-2q-products,SWAP o Y[1] (before),2,4,gates/clifford_t.json,,4,300,10.0,found,True,4,1.0,1.0,0.0,"CNOT[0,1] @ CNOT[1,0] @ CNOT[0,1] @ Y[0]",2973,0.08529719998477958,34854.60250196374,4,True
+149,known-2q-products,SWAP o Z[0] (after),2,4,gates/clifford_t.json,,4,300,10.0,found,True,4,1.0,1.0,0.0,"CNOT[1,0] @ Z[1] @ CNOT[0,1] @ CNOT[1,0]",2718,0.07615300000179559,35691.305660130434,4,True
+150,known-2q-products,SWAP o Z[0] (before),2,4,gates/clifford_t.json,,4,300,10.0,found,True,4,1.0,1.0,0.0,"CNOT[0,1] @ Z[0] @ CNOT[1,0] @ CNOT[0,1]",2717,0.07540909998351708,36030.13430201238,4,True
+151,known-2q-products,SWAP o Z[1] (after),2,4,gates/clifford_t.json,,4,300,10.0,found,True,4,1.0,1.0,0.0,"CNOT[0,1] @ Z[0] @ CNOT[1,0] @ CNOT[0,1]",2717,0.07583169999998063,35829.3431375097,4,True
+152,known-2q-products,SWAP o Z[1] (before),2,4,gates/clifford_t.json,,4,300,10.0,found,True,4,1.0,1.0,0.0,"CNOT[1,0] @ Z[1] @ CNOT[0,1] @ CNOT[1,0]",2718,0.07267090000095777,37401.49083008712,4,True
+153,known-2q-products,SWAP o H[0] (after),2,4,gates/clifford_t.json,,4,300,10.0,found,True,4,1.0,1.0,1.1102230246251565e-16,"CZ[0,1] @ H[1] @ CNOT[1,0] @ CNOT[0,1]",2671,0.061095999990357086,43718.08302379157,4,True
+154,known-2q-products,SWAP o H[0] (before),2,4,gates/clifford_t.json,,4,300,10.0,found,True,4,1.0,1.0,1.1102230246251565e-16,"CZ[0,1] @ H[0] @ CNOT[0,1] @ CNOT[1,0]",2687,0.06101579999085516,44037.773829118334,4,True
+155,known-2q-products,SWAP o H[1] (after),2,4,gates/clifford_t.json,,4,300,10.0,found,True,4,1.0,1.0,1.1102230246251565e-16,"CZ[0,1] @ H[0] @ CNOT[0,1] @ CNOT[1,0]",2687,0.06929300000774674,38777.36567473773,4,True
+156,known-2q-products,SWAP o H[1] (before),2,4,gates/clifford_t.json,,4,300,10.0,found,True,4,1.0,1.0,1.1102230246251565e-16,"CZ[0,1] @ H[1] @ CNOT[1,0] @ CNOT[0,1]",2671,0.07803130001411773,34229.8539114016,4,True
+157,known-2q-products,SWAP o S[0] (after),2,4,gates/clifford_t.json,,4,300,10.0,found,True,4,1.0,1.0,0.0,"S[1] @ CNOT[1,0] @ CNOT[0,1] @ CNOT[1,0]",2650,0.06854930002009496,38658.30868036819,4,True
+158,known-2q-products,SWAP o S[0] (before),2,4,gates/clifford_t.json,,4,300,10.0,found,True,4,1.0,1.0,0.0,"S[0] @ CNOT[0,1] @ CNOT[1,0] @ CNOT[0,1]",2649,0.07714199999463744,34339.27043872529,4,True
+159,known-2q-products,SWAP o S[1] (after),2,4,gates/clifford_t.json,,4,300,10.0,found,True,4,1.0,1.0,0.0,"S[0] @ CNOT[0,1] @ CNOT[1,0] @ CNOT[0,1]",2649,0.07838130000163801,33796.32641898822,4,True
+160,known-2q-products,SWAP o S[1] (before),2,4,gates/clifford_t.json,,4,300,10.0,found,True,4,1.0,1.0,0.0,"S[1] @ CNOT[1,0] @ CNOT[0,1] @ CNOT[1,0]",2650,0.0670518999977503,39521.62429534304,4,True
+161,named-2q,CNOT10|CNOT-only,2,4,gates/clifford_t.json,CNOT,5,400,10.0,found,True,1,1.0,1.0,0.0,"CNOT[1,0]",2,6.739998934790492e-05,29673.59519415367,1,True
+162,named-2q,iSWAP|full-preset,2,4,gates/clifford_t.json,,5,500,10.0,found,True,4,1.0,1.0,0.0,"CNOT[0,1] @ S[1] @ CNOT[1,0] @ CNOT[0,1]",2813,0.08880259998841211,31677.00045231862,4,True
+163,named-2q,"iSWAP|CNOT,H,S-only",2,4,gates/clifford_t.json,"CNOT,H,S",6,600,10.0,found,True,4,1.0,1.0,0.0,"CNOT[0,1] @ S[1] @ CNOT[1,0] @ CNOT[0,1]",215,0.005448300013085827,39461.850390692336,4,True
+164,named-2q,sqrt-SWAP,2,4,gates/clifford_t.json,,5,800,15.0,,False,,0.853553390593274,,,,28240,0.714311199990334,39534.58940638498,0,
+165,named-2q,CH,2,4,gates/clifford_t.json,,4,600,10.0,found,False,,0.8535533905932737,,,,12240,0.34308530000271276,35676.25893590666,0,False
+166,haar-1q,haar1q-00|HST,1,2,gates/clifford_t.json,"H,S,T",8,800,8.0,not_found,False,,0.9929124490014112,,,,1863,0.046887500007869676,39733.40441881762,0,True
+167,haar-1q,haar1q-01|HT,1,2,gates/clifford_t.json,"H,T",8,800,8.0,not_found,False,,0.9755226283023982,,,,266,0.006420300022000447,41431.0856328361,0,True
+168,haar-1q,haar1q-02|RXY,1,2,gates/universal_rxy.json,,8,800,8.0,not_found,False,,0.9988546076890912,,,,102168,2.7094275999988895,37708.33367167363,0,True
+169,haar-1q,haar1q-03|RXY,1,2,gates/universal_rxy.json,,8,800,8.0,not_found,False,,0.9985806052645063,,,,102168,2.6023710000154097,39259.58289551913,0,True
+170,haar-1q,haar1q-04|HST,1,2,gates/clifford_t.json,"H,S,T",8,800,8.0,not_found,False,,0.9946256600261011,,,,1863,0.048646400013240054,38296.770151397606,0,True
+171,haar-1q,haar1q-05|HT,1,2,gates/clifford_t.json,"H,T",8,800,8.0,not_found,False,,0.9831767074076272,,,,266,0.006247100012842566,42579.756919717416,0,True
+172,haar-1q,haar1q-06|RXY,1,2,gates/universal_rxy.json,,8,800,8.0,not_found,False,,0.9984247731087259,,,,102168,2.5465153999975882,40120.7076933824,0,True
+173,haar-1q,haar1q-07|RXY,1,2,gates/universal_rxy.json,,8,800,8.0,not_found,False,,0.9996094606330586,,,,102168,2.7560276000003796,37070.746316178374,0,True
+174,haar-1q,haar1q-08|HST,1,2,gates/clifford_t.json,"H,S,T",8,800,8.0,not_found,False,,0.9624192898345764,,,,1863,0.05605610000202432,33234.563230990425,0,True
+175,haar-1q,haar1q-09|HT,1,2,gates/clifford_t.json,"H,T",8,800,8.0,not_found,False,,0.9894659310300209,,,,266,0.006053499993868172,43941.52147839132,0,True
+181,scaling-beam,SWAP|beam-25,2,4,gates/clifford_t.json,,4,25,30.0,found,True,3,1.0,1.0,0.0,"CNOT[0,1] @ CNOT[1,0] @ CNOT[0,1]",301,0.007519800012232736,40027.66024500016,3,True
+182,scaling-beam,SWAP|beam-75,2,4,gates/clifford_t.json,,4,75,30.0,found,True,3,1.0,1.0,0.0,"CNOT[0,1] @ CNOT[1,0] @ CNOT[0,1]",301,0.011030199995730072,27288.716443629386,3,True
+183,scaling-beam,SWAP|beam-225,2,4,gates/clifford_t.json,,4,225,30.0,found,True,3,1.0,1.0,0.0,"CNOT[0,1] @ CNOT[1,0] @ CNOT[0,1]",301,0.008998800010886043,33448.90425788703,3,True
+184,scaling-beam,SWAP|beam-675,2,4,gates/clifford_t.json,,4,675,30.0,found,True,3,1.0,1.0,0.0,"CNOT[0,1] @ CNOT[1,0] @ CNOT[0,1]",301,0.01125730000785552,26738.205412484123,3,True
+189,scaling-gateset,SWAP|gates-CNOT,2,4,gates/clifford_t.json,CNOT,5,800,20.0,found,True,3,1.0,1.0,0.0,"CNOT[0,1] @ CNOT[1,0] @ CNOT[0,1]",9,0.000231999991228804,38793.1049149221,3,True
+190,scaling-gateset,SWAP|gates-CNOT+H,2,4,gates/clifford_t.json,"CNOT,H",5,800,20.0,found,True,3,1.0,1.0,0.0,"CNOT[0,1] @ CNOT[1,0] @ CNOT[0,1]",31,0.0010178999800700694,30454.85863735457,3,True
+191,scaling-gateset,SWAP|gates-CNOT+CZ,2,4,gates/clifford_t.json,"CNOT,CZ",5,800,20.0,found,True,3,1.0,1.0,0.0,"CNOT[0,1] @ CNOT[1,0] @ CNOT[0,1]",21,0.0008239999879151583,25485.437266975092,3,True
+192,scaling-gateset,"SWAP|gates-CNOT,CZ+H",2,4,gates/clifford_t.json,"CNOT,CZ,H",5,800,20.0,found,True,3,1.0,1.0,0.0,"CNOT[0,1] @ CNOT[1,0] @ CNOT[0,1]",51,0.0016540999931748956,30832.477002862506,3,True
+193,scaling-gateset,"SWAP|gates-CNOT,CZ,H+T",2,4,gates/clifford_t.json,"CNOT,CZ,H,T",5,800,20.0,found,True,3,1.0,1.0,0.0,"CNOT[0,1] @ CNOT[1,0] @ CNOT[0,1]",85,0.002438399998936802,34858.92389971372,3,True
+194,scaling-gateset,SWAP|gates-full-CT,2,4,gates/clifford_t.json,,5,800,20.0,found,True,3,1.0,1.0,0.0,"CNOT[0,1] @ CNOT[1,0] @ CNOT[0,1]",301,0.008878099994035438,33903.65057863962,3,True
+202,stress-3q,H-H-H,3,8,gates/clifford_t.json,,4,600,10.0,found,True,3,1.0,1.0,1.6653345369377348e-16,H[2] @ H[1] @ H[0],9102,0.2788116000010632,32645.700537442815,3,True
+203,stress-3q,CNOT|idle-q2,3,8,gates/clifford_t.json,,2,600,10.0,found,True,1,1.0,1.0,0.0,"CNOT[0,1]",19,0.0007507000118494034,25309.71053695888,1,True
+204,stress-3q,SWAP|idle-q2,3,8,gates/clifford_t.json,,4,600,10.0,found,True,3,1.0,1.0,0.0,"CNOT[0,1] @ CNOT[1,0] @ CNOT[0,1]",919,0.021394900017185137,42954.16193867823,3,True
